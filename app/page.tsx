@@ -1,65 +1,90 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  ChefHat,
+  Search,
+  Sparkles,
+  UtensilsCrossed,
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-zinc-950 text-white">
+
+      <section className="relative overflow-hidden">
+
+        <div className="absolute inset-0 bg-linear-to-br from-red-700/40 via-orange-600/20 to-black" />
+        <div className="absolute -left-40 -top-20 h-96 w-96 rounded-full bg-orange-500/20 blur-3xl" />
+        <div className="absolute -right-40 top-40 h-96 w-96 rounded-full bg-red-500/20 blur-3xl" />
+        <div className="absolute left-10 top-20 h-6 w-6 animate-bounce rounded-full bg-orange-400 blur-sm" />
+        <div className="absolute right-20 top-32 h-4 w-4 animate-pulse rounded-full bg-red-400 blur-sm" />
+        <div className="absolute left-1/2 top-10 h-3 w-3 animate-ping rounded-full bg-yellow-300" />
+
+        <div className="relative min-h-screen mx-auto max-w-7xl px-6 py-28 lg:flex lg:items-center lg:py-40">
+          <div className="max-w-2xl space-y-6 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm backdrop-blur">
+              <Sparkles className="h-4 w-4 text-yellow-400" />
+              <span className="text-zinc-300">50+ Authentic Recipes</span>
+            </div>
+
+            <h1 className="text-5xl font-bold leading-tight sm:text-7xl">
+              Order Tasty & Fresh
+              <span className="block bg-linear-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+                Food Anytime
+              </span>
+            </h1>
+
+            <p className="text-lg text-zinc-300">
+              Browse curated recipes with full nutrition, beautiful visuals, and
+              effortless cooking steps — all in one place.
+            </p>
+
+            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-start">
+              <Link href="/recipes">
+                <Button
+                  size="lg"
+                  className="gap-2 bg-linear-to-r from-orange-500 to-red-600 text-base font-semibold shadow-xl shadow-red-500/20"
+                >
+                  <Search className="h-5 w-5" />
+                  Browse Recipes
+                </Button>
+              </Link>
+
+              <Link href="/recipes?filter=Veg">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-zinc-700 bg-white/5 text-base backdrop-blur"
+                >
+                  <ChefHat className="h-5 w-5" />
+                  Vegetarian Only
+                </Button>
+              </Link>
+            </div>
+          </div>
+          <div className="mt-16 flex w-full justify-center lg:mt-0 lg:w-1/2">
+            <div className="relative">
+              <img
+                src="/hero_dish.webp"
+                alt="Food Dish"
+                className="h-auto w-[460px] rounded-3xl shadow-[0_0_80px_-20px_rgba(255,0,0,0.4)]"
+              />
+
+              <div className="absolute -right-6 top-10 rounded-xl bg-white/10 px-4 py-2 backdrop-blur-md">
+                ⭐ 4.9 Rating
+              </div>
+              <div className="absolute -left-6 bottom-10 rounded-xl bg-white/10 px-4 py-2 backdrop-blur-md">
+                <UtensilsCrossed className="mr-2 inline-block h-4 w-4 text-orange-400" />
+                Chef Special
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
+
+     
+
+      
     </div>
   );
 }
