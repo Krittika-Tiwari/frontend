@@ -2,9 +2,6 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Search, X, Leaf, Drumstick, Cake } from "lucide-react";
 import { CategoryFilter } from "@/lib/types";
 
@@ -63,24 +60,24 @@ export function RecipeFilters() {
       <form onSubmit={handleSearch} className="flex gap-3 items-center">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-orange-400" />
-          <Input
+          <input
             type="text"
             placeholder="Search recipes, ingredients, or descriptions"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 ring-1 ring-transparent focus:ring-2 focus:ring-orange-400/60"
+            className="pl-10 ring-1 w-full ring-transparent focus:ring-2 focus:ring-orange-400/60 h-9 rounded-md border bg-white dark:bg-zinc-800 px-3 text-sm"
           />
         </div>
 
-        <Button
+        <button
           type="submit"
-          className="bg-linear-to-r from-orange-500 to-red-600 text-white shadow-md hover:opacity-95"
+          className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-md px-3 py-1 text-sm hover:opacity-95"
         >
           Search
-        </Button>
+        </button>
 
-        <Button
-          variant="ghost"
+        <button
+          type="button"
           onClick={() => {
             setSearch("");
             const params = new URLSearchParams(searchParams.toString());
@@ -88,10 +85,10 @@ export function RecipeFilters() {
             params.delete("page");
             router.push(`/recipes?${params.toString()}`);
           }}
-          className="text-sm text-zinc-600 dark:text-zinc-300"
+          className="text-sm text-zinc-600 dark:text-zinc-300 px-2 py-1"
         >
           Reset
-        </Button>
+        </button>
       </form>
 
       <div className="flex flex-wrap items-center gap-3">
@@ -140,8 +137,8 @@ export function RecipeFilters() {
             Active filters:
           </span>
           {search && (
-            <Badge variant="secondary" className="gap-2">
-              Search: {search}
+            <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-sm">
+              <span>Search: {search}</span>
               <button
                 onClick={() => {
                   setSearch("");
@@ -151,22 +148,20 @@ export function RecipeFilters() {
                 }}
                 className="ml-1 hover:text-zinc-900 dark:hover:text-zinc-100"
               >
-                <X className="h-3 w-3" />
-                {}
+                <X className="h-3 w-3" />{}
               </button>
-            </Badge>
+            </span>
           )}
           {activeCategory !== "all" && (
-            <Badge variant="secondary" className="gap-2">
-              Category: {activeCategory}
+            <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-sm">
+              <span>Category: {activeCategory}</span>
               <button
                 onClick={() => handleCategoryChange("all")}
                 className="ml-1 hover:text-zinc-900 dark:hover:text-zinc-100"
               >
-                <X className="h-3 w-3" />
-                {}
+                <X className="h-3 w-3" />{}
               </button>
-            </Badge>
+            </span>
           )}
         </div>
       )}

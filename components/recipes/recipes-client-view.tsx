@@ -4,8 +4,7 @@ import { useState } from "react";
 import { Recipe } from "@/lib/types";
 import ColumnSelector from "./column-selector";
 import RecipesTable from "./recipes-table";
-import { RecipeCard } from "@/components/ui/recipes/recipe-card";
-import { Button } from "../button";
+import { RecipeCard } from "@/components/recipes/recipe-card";
 
 interface Props {
   recipes: Recipe[];

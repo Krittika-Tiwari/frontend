@@ -4,10 +4,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Flame, Activity, Wheat, Droplet } from "lucide-react";
 import { Recipe } from "@/lib/types";
 
@@ -54,18 +50,18 @@ export default function RecipeDetailPage() {
         <div className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
             <div className="relative h-screen w-full overflow-hidden">
-              <Skeleton className="h-full w-full" />
+              <div className="h-full w-full bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
             </div>
 
             <div className="h-screen overflow-auto p-8 flex justify-center">
               <div className="w-full max-w-xl bg-white dark:bg-zinc-900 shadow-lg rounded-2xl p-6 flex flex-col gap-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="max-w-prose w-full">
-                    <Skeleton className="mb-2 h-8 w-3/4" />
-                    <Skeleton className="mb-1 h-4 w-5/6" />
+                    <div className="mb-2 h-8 w-3/4 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
+                    <div className="mb-1 h-4 w-5/6 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                   </div>
                   <div className="ml-2">
-                    <Skeleton className="h-8 w-20 rounded-full" />
+                    <div className="h-8 w-20 rounded-full bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                   </div>
                 </div>
 
@@ -75,31 +71,31 @@ export default function RecipeDetailPage() {
                       key={i}
                       className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 dark:bg-zinc-800 p-3 text-center"
                     >
-                      <Skeleton className="mb-2 h-6 w-6 rounded-full" />
-                      <Skeleton className="h-6 w-16" />
-                      <Skeleton className="mt-1 h-3 w-20" />
+                      <div className="mb-2 h-6 w-6 rounded-full bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
+                      <div className="h-6 w-16 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
+                      <div className="mt-1 h-3 w-20 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                     </div>
                   ))}
                 </div>
 
                 <div className="mt-2 space-y-4 w-full">
                   <div>
-                    <Skeleton className="mb-2 h-5 w-40" />
+                    <div className="mb-2 h-5 w-40 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                     <div className="rounded-lg bg-transparent">
                       <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-900/50">
-                        <Skeleton className="h-4 w-full mb-2" />
-                        <Skeleton className="h-4 w-5/6" />
+                        <div className="h-4 w-full mb-2 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
+                        <div className="h-4 w-5/6 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <Skeleton className="mb-2 h-5 w-44" />
+                    <div className="mb-2 h-5 w-44 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                     <div className="space-y-2">
                       {[...Array(3)].map((_, i) => (
                         <div key={i} className="flex gap-3 items-start">
-                          <Skeleton className="h-7 w-7 rounded-full" />
-                          <Skeleton className="h-4 w-full" />
+                          <div className="h-7 w-7 rounded-full bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
+                          <div className="h-4 w-full bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                         </div>
                       ))}
                     </div>
@@ -107,7 +103,7 @@ export default function RecipeDetailPage() {
                 </div>
 
                 <div className="mt-4 flex justify-start">
-                  <Skeleton className="h-9 w-36 rounded-md" />
+                  <div className="h-9 w-36 rounded-md bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                 </div>
               </div>
             </div>
@@ -120,15 +116,18 @@ export default function RecipeDetailPage() {
   if (error || !recipe) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-950">
-        <Card className="max-w-md p-8 text-center">
+        <div className="max-w-md p-8 text-center">
           <h2 className="mb-4 text-2xl font-bold">Recipe Not Found</h2>
           <p className="mb-6 text-zinc-600 dark:text-zinc-400">
             {error || "The recipe you are looking for does not exist."}
           </p>
-          <Link href="/recipes">
-            <Button>Back to Recipes</Button>
+          <Link
+            href="/recipes"
+            className="inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm"
+          >
+            Back to Recipes
           </Link>
-        </Card>
+        </div>
       </div>
     );
   }
@@ -171,13 +170,13 @@ export default function RecipeDetailPage() {
                   </p>
                 </div>
                 <div className="ml-2">
-                  <Badge
+                  <span
                     className={`${getCategoryColor(
                       recipe.category
-                    )} text-sm py-1 px-3 rounded-full`}
+                    )} text-sm py-1 px-3 rounded-full inline-block`}
                   >
                     {recipe.category}
-                  </Badge>
+                  </span>
                 </div>
               </div>
 
@@ -250,11 +249,12 @@ export default function RecipeDetailPage() {
               </div>
 
               <div className="mt-4 flex justify-start">
-                <Link href="/recipes">
-                  <Button variant="outline" className="gap-2 text-sm">
-                    <ArrowLeft className="h-4 w-4" />
-                    Back to Recipes
-                  </Button>
+                <Link
+                  href="/recipes"
+                  className="inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Recipes
                 </Link>
               </div>
             </div>

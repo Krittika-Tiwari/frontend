@@ -2,7 +2,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
 interface Column {
@@ -74,17 +73,20 @@ export default function ColumnSelector({
   }, []);
   return (
     <div className="relative" ref={ref}>
-      <Button
-        variant={open ? "default" : "outline"}
-        size="sm"
+      <button
+        type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-2"
         aria-expanded={open}
         aria-haspopup="menu"
+        className={`inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none ${
+          open
+            ? "bg-zinc-900 text-white dark:bg-zinc-200 dark:text-zinc-900"
+            : "border bg-white text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
+        }`}
       >
-        Columns
+        <span>Columns</span>
         <ChevronDown className="h-4 w-4" />
-      </Button>
+      </button>
 
       {open && (
         <div className="absolute right-0 z-50 mt-2 w-64 rounded-lg border bg-white p-3 shadow-lg dark:bg-zinc-900">

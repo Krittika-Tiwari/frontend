@@ -1,13 +1,4 @@
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-
 import { Flame, ArrowRight } from "lucide-react";
 import { Recipe } from "@/lib/types";
 import Image from "next/image";
@@ -31,8 +22,8 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   };
 
   return (
-    <Card className="group overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 shadow-sm hover:shadow-lg transition-transform hover:-translate-y-1">
-      <CardHeader className="p-0">
+    <div className="group overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 shadow-sm hover:shadow-lg transition-transform hover:-translate-y-1">
+      <div className="p-0">
         <div className="relative aspect-video overflow-hidden bg-zinc-100">
           <div className="relative aspect-video overflow-hidden bg-zinc-100">
             <Image
@@ -46,13 +37,13 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
           <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
           <div className="absolute left-3 top-3">
-            <Badge
+            <span
               className={`${getCategoryColor(
                 recipe.category
-              )} text-sm py-1 px-2 rounded-full`}
+              )} text-sm py-1 px-2 rounded-full inline-block`}
             >
               {recipe.category}
-            </Badge>
+            </span>
           </div>
 
           <div className="absolute left-3 bottom-3 text-white">
@@ -64,10 +55,10 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
             </p>
           </div>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="p-4 pt-0 gap-1">
-        <p className="line-clamp-3  text-zinc-700 dark:text-zinc-300">
+      <div className="p-4 pt-2 flex flex-col gap-2">
+        <p className="line-clamp-3  text-sm text-zinc-700 dark:text-zinc-300">
           {recipe.description}
         </p>
         <div className=" flex items-center justify-between">
@@ -86,20 +77,15 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
             </div>
           </div>
 
-          <Link href={`/recipes/${recipe.id}`}>
-            <Button
-              size="sm"
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              View
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+          <Link
+            href={`/recipes/${recipe.id}`}
+            className="inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          >
+            <span>View</span>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
-      </CardContent>
-
-      
-    </Card>
+      </div>
+    </div>
   );
 }

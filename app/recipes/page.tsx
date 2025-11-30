@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { RecipesResponse } from "@/lib/types";
-import { RecipeFilters } from "@/components/ui/recipes/recipe-filters";
-import RecipesClientView from "@/components/ui/recipes/recipes-client-view";
-import Navbar from "@/components/ui/navbar";
+import { RecipeFilters } from "@/components/recipes/recipe-filters";
+import RecipesClientView from "@/components/recipes/recipes-client-view";
+import Navbar from "@/components/recipes/navbar";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
@@ -91,22 +90,19 @@ export default async function RecipesPage({ searchParams }: RecipesPageProps) {
                         params.set("page", String(currentPage - 1));
                         return `/recipes?${params.toString()}`;
                       })()}
-                    >
-                      <Button variant="outline" size="sm" className="gap-2">
-                        <ChevronLeft className="h-4 w-4" />
-                        Previous
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      disabled
-                      className="gap-2"
+                      className="inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm"
                     >
                       <ChevronLeft className="h-4 w-4" />
                       Previous
-                    </Button>
+                    </Link>
+                  ) : (
+                    <button
+                      className="inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm opacity-50 cursor-not-allowed"
+                      disabled
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                      Previous
+                    </button>
                   )}
 
                   <div className="hidden items-center gap-1 sm:flex">
@@ -134,14 +130,17 @@ export default async function RecipesPage({ searchParams }: RecipesPageProps) {
                             key={pageNum}
                             href={`/recipes?${params.toString()}`}
                           >
-                            <Button
-                              variant={
-                                currentPage === pageNum ? "default" : "ghost"
-                              }
-                              size="sm"
+                            <div
+                              key={pageNum}
+                            //   href={`/recipes?${params.toString()}`}
+                              className={`px-2 py-1 rounded-md text-sm ${
+                                currentPage === pageNum
+                                  ? "bg-zinc-900 text-white"
+                                  : "text-zinc-700"
+                              }`}
                             >
                               {pageNum}
-                            </Button>
+                            </div>
                           </Link>
                         );
                       }
@@ -158,21 +157,16 @@ export default async function RecipesPage({ searchParams }: RecipesPageProps) {
                         return `/recipes?${params.toString()}`;
                       })()}
                     >
-                      <Button variant="outline" size="sm" className="gap-2">
+                      <button className="gap-2 flex justify-center items-center border rounded-md px-3 py-1 text-sm">
                         Next
                         <ChevronRight className="h-4 w-4" />
-                      </Button>
+                      </button>
                     </Link>
                   ) : (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      disabled
-                      className="gap-2"
-                    >
+                    <button disabled className="gap-2">
                       Next
                       <ChevronRight className="h-4 w-4" />
-                    </Button>
+                    </button>
                   )}
                 </div>
               </div>
