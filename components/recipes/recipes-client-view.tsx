@@ -26,7 +26,7 @@ export default function RecipesClientView({ recipes }: Props) {
   const [view, setView] = useState<"grid" | "table">("grid");
 
   return (
-    <div className="mb-6">
+    <div className="mb-6 min-h-[500px]">
       <div className="mb-4 flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="text-sm text-zinc-600 dark:text-zinc-400">View</div>

@@ -71,7 +71,7 @@ export function RecipeFilters() {
 
         <button
           type="submit"
-          className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-md px-3 py-1 text-sm hover:opacity-95"
+          className="inline-flex items-center gap-2 rounded-md bg-linear-to-r from-orange-500 to-red-600 text-white shadow-md px-3 py-1 text-sm hover:opacity-95"
         >
           Search
         </button>

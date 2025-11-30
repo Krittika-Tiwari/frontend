@@ -55,7 +55,7 @@ export default async function RecipesPage({ searchParams }: RecipesPageProps) {
         </div>
 
         {recipes.length === 0 ? (
-          <div className="flex min-h-[400px] flex-col items-center justify-center rounded-lg border-2 border-dashed">
+          <div className="flex min-h-[500px] flex-col items-center justify-center rounded-lg border-2 border-dashed">
             <p className="text-xl font-medium text-zinc-900 dark:text-zinc-100">
               No recipes found
             </p>
@@ -163,7 +163,7 @@ export default async function RecipesPage({ searchParams }: RecipesPageProps) {
                       </button>
                     </Link>
                   ) : (
-                    <button disabled className="gap-2">
+                    <button disabled className="gap-2 flex justify-center items-center border rounded-md px-3 py-1 text-sm">
                       Next
                       <ChevronRight className="h-4 w-4" />
                     </button>
