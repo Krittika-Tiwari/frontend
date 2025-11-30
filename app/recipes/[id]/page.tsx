@@ -5,12 +5,11 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Flame, Activity, Wheat, Droplet } from "lucide-react";
 import { Recipe } from "@/lib/types";
-
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
@@ -20,8 +19,8 @@ export default function RecipeDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-      //fetch recipe details
+  useEffect(() => {
+    //fetch recipe details
     async function fetchRecipe() {
       try {
         setLoading(true);
@@ -34,7 +33,11 @@ export default function RecipeDetailPage() {
         const data: Recipe = await res.json();
         setRecipe(data);
       } catch (error) {
-        setError(error instanceof Error ? error.message : "An error occurred while fetching the recipe.");
+        setError(
+          error instanceof Error
+            ? error.message
+            : "An error occurred while fetching the recipe."
+        );
       } finally {
         setLoading(false);
       }
@@ -48,15 +51,66 @@ export default function RecipeDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
-        <div className="mx-auto max-w-4xl px-6 py-8">
-          <Skeleton className="mb-6 h-10 w-32" />
-          <Skeleton className="mb-4 h-96 w-full rounded-xl" />
-          <Skeleton className="mb-2 h-12 w-3/4" />
-          <Skeleton className="mb-8 h-6 w-full" />
-          <div className="grid grid-cols-4 gap-4">
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-24" />
-            ))}
+        <div className="w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+            <div className="relative h-screen w-full overflow-hidden">
+              <Skeleton className="h-full w-full" />
+            </div>
+
+            <div className="h-screen overflow-auto p-8 flex justify-center">
+              <div className="w-full max-w-xl bg-white dark:bg-zinc-900 shadow-lg rounded-2xl p-6 flex flex-col gap-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="max-w-prose w-full">
+                    <Skeleton className="mb-2 h-8 w-3/4" />
+                    <Skeleton className="mb-1 h-4 w-5/6" />
+                  </div>
+                  <div className="ml-2">
+                    <Skeleton className="h-8 w-20 rounded-full" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-4 gap-3">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 dark:bg-zinc-800 p-3 text-center"
+                    >
+                      <Skeleton className="mb-2 h-6 w-6 rounded-full" />
+                      <Skeleton className="h-6 w-16" />
+                      <Skeleton className="mt-1 h-3 w-20" />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-2 space-y-4 w-full">
+                  <div>
+                    <Skeleton className="mb-2 h-5 w-40" />
+                    <div className="rounded-lg bg-transparent">
+                      <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-900/50">
+                        <Skeleton className="h-4 w-full mb-2" />
+                        <Skeleton className="h-4 w-5/6" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Skeleton className="mb-2 h-5 w-44" />
+                    <div className="space-y-2">
+                      {[...Array(3)].map((_, i) => (
+                        <div key={i} className="flex gap-3 items-start">
+                          <Skeleton className="h-7 w-7 rounded-full" />
+                          <Skeleton className="h-4 w-full" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-start">
+                  <Skeleton className="h-9 w-36 rounded-md" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -104,7 +158,6 @@ export default function RecipeDetailPage() {
               className="object-cover"
             />
           </div>
-
 
           <div className="h-screen overflow-auto p-8 flex justify-center">
             <div className="w-full max-w-xl bg-white dark:bg-zinc-900 shadow-lg rounded-2xl p-6 flex flex-col gap-6">
@@ -208,8 +261,6 @@ export default function RecipeDetailPage() {
           </div>
         </div>
       </div>
-    </div >
-        
+    </div>
   );
-
 }
