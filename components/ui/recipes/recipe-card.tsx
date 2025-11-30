@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 
 import { Flame, ArrowRight } from "lucide-react";
 import { Recipe } from "@/lib/types";
+import Image from "next/image";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -33,15 +34,16 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
     <Card className="group overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 shadow-sm hover:shadow-lg transition-transform hover:-translate-y-1">
       <CardHeader className="p-0">
         <div className="relative aspect-video overflow-hidden bg-zinc-100">
-          <img
-            src={recipe.image_url}
-            alt={recipe.name}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-
+          <div className="relative aspect-video overflow-hidden bg-zinc-100">
+            <Image
+              src={recipe.image_url}
+              alt={recipe.name}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
 
           <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-
 
           <div className="absolute left-3 top-3">
             <Badge
@@ -52,7 +54,6 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
               {recipe.category}
             </Badge>
           </div>
-
 
           <div className="absolute left-3 bottom-3 text-white">
             <h3 className="text-base font-semibold drop-shadow">
@@ -65,35 +66,40 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="p-4 pt-0">
-        <p className="line-clamp-3 text-sm text-zinc-700 dark:text-zinc-300">
+      <CardContent className="p-4 pt-0 gap-1">
+        <p className="line-clamp-3  text-zinc-700 dark:text-zinc-300">
           {recipe.description}
         </p>
+        <div className=" flex items-center justify-between">
+          <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
+            <div className="flex items-center gap-2">
+              <Flame className="h-4 w-4 text-orange-500" />
+              <span className="font-medium">{recipe.calories}</span>
+              <span className="text-xs text-zinc-500">cal</span>
+            </div>
+            <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700" />
+            <div className="text-xs">
+              <span className="font-medium text-zinc-900 dark:text-zinc-100">
+                {recipe.protein}g
+              </span>{" "}
+              protein
+            </div>
+          </div>
+
+          <Link href={`/recipes/${recipe.id}`}>
+            <Button
+              size="sm"
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              View
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        </div>
       </CardContent>
 
-      <CardFooter className="p-4 pt-0 flex items-center justify-between">
-        <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
-          <div className="flex items-center gap-2">
-            <Flame className="h-4 w-4 text-orange-500" />
-            <span className="font-medium">{recipe.calories}</span>
-            <span className="text-xs text-zinc-500">cal</span>
-          </div>
-          <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700" />
-          <div className="text-xs">
-            <span className="font-medium text-zinc-900 dark:text-zinc-100">
-              {recipe.protein}g
-            </span>{" "}
-            protein
-          </div>
-        </div>
-
-        <Link href={`/recipes/${recipe.id}`}>
-          <Button size="sm" variant="ghost" className="flex items-center gap-2">
-            View
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
-        </Link>
-      </CardFooter>
+      
     </Card>
   );
 }

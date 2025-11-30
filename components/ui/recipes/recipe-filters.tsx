@@ -23,6 +23,7 @@ export function RecipeFilters() {
   const activeCategory = (searchParams.get("filter") ||
     "all") as CategoryFilter;
 
+  //search function
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams(searchParams.toString());
@@ -33,10 +34,10 @@ export function RecipeFilters() {
       params.delete("search");
     }
     params.delete("page");
-
     router.push(`/recipes?${params.toString()}`);
   };
 
+  //category filter function
   const handleCategoryChange = (category: CategoryFilter) => {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -46,10 +47,10 @@ export function RecipeFilters() {
       params.set("filter", category);
     }
     params.delete("page");
-
     router.push(`/recipes?${params.toString()}`);
   };
 
+  // Function for clearing all filters
   const clearFilters = () => {
     setSearch("");
     router.push("/recipes");

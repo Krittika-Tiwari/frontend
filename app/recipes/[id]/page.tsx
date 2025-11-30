@@ -19,7 +19,8 @@ export default function RecipeDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+    useEffect(() => {
+      //fetch recipe details
     async function fetchRecipe() {
       try {
         setLoading(true);
@@ -31,8 +32,8 @@ export default function RecipeDetailPage() {
 
         const data: Recipe = await res.json();
         setRecipe(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
+      } catch (error) {
+        setError(error instanceof Error ? error.message : "An error occurred while fetching the recipe.");
       } finally {
         setLoading(false);
       }
@@ -195,7 +196,7 @@ export default function RecipeDetailPage() {
 
               <div className="mt-4 flex justify-start">
                 <Link href="/recipes">
-                  <Button variant="ghost" className="gap-2 text-sm">
+                  <Button variant="outline" className="gap-2 text-sm">
                     <ArrowLeft className="h-4 w-4" />
                     Back to Recipes
                   </Button>

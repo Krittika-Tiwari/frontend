@@ -18,6 +18,7 @@ interface RecipesPageProps {
   searchParams: SearchParams | Promise<SearchParams>;
 }
 
+//fetching data from backend
 async function getRecipes(
   searchParams: SearchParams
 ): Promise<RecipesResponse> {

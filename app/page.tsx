@@ -1,24 +1,15 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  ChefHat,
-  Search,
-  Sparkles,
-  UtensilsCrossed,
-} from "lucide-react";
+import { ChefHat, Search, Sparkles, UtensilsCrossed } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
-
       <section className="relative overflow-hidden">
-
         <div className="absolute inset-0 bg-linear-to-br from-red-700/40 via-orange-600/20 to-black" />
         <div className="absolute -left-40 -top-20 h-96 w-96 rounded-full bg-orange-500/20 blur-3xl" />
         <div className="absolute -right-40 top-40 h-96 w-96 rounded-full bg-red-500/20 blur-3xl" />
-        <div className="absolute left-10 top-20 h-6 w-6 animate-bounce rounded-full bg-orange-400 blur-sm" />
-        <div className="absolute right-20 top-32 h-4 w-4 animate-pulse rounded-full bg-red-400 blur-sm" />
-        <div className="absolute left-1/2 top-10 h-3 w-3 animate-ping rounded-full bg-yellow-300" />
 
         <div className="relative min-h-screen mx-auto max-w-7xl px-6 py-28 lg:flex lg:items-center lg:py-40">
           <div className="max-w-2xl space-y-6 text-center lg:text-left">
@@ -64,11 +55,14 @@ export default function Home() {
           </div>
           <div className="mt-16 flex w-full justify-center lg:mt-0 lg:w-1/2">
             <div className="relative">
-              <img
-                src="/hero_dish.webp"
-                alt="Food Dish"
-                className="h-auto w-[460px] rounded-3xl shadow-[0_0_80px_-20px_rgba(255,0,0,0.4)]"
-              />
+              <div className="relative w-[460px] h-[460px] rounded-3xl overflow-hidden">
+                <Image
+                  src="/hero_dish.webp"
+                  alt="Food Dish"
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
               <div className="absolute -right-6 top-10 rounded-xl bg-white/10 px-4 py-2 backdrop-blur-md">
                 ⭐ 4.9 Rating
@@ -81,10 +75,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-     
-
-      
     </div>
   );
 }
