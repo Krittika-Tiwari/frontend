@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, } from "@/components/ui/card";
@@ -95,14 +96,15 @@ export default function RecipeDetailPage() {
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
       <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
-
-          <div className="h-screen w-full overflow-hidden">
-            <img
+          <div className="relative h-screen w-full overflow-hidden">
+            <Image
               src={recipe.image_url}
               alt={recipe.name}
-              className="h-full w-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
+
 
           <div className="h-screen overflow-auto p-8 flex justify-center">
             <div className="w-full max-w-xl bg-white dark:bg-zinc-900 shadow-lg rounded-2xl p-6 flex flex-col gap-6">
@@ -206,6 +208,8 @@ export default function RecipeDetailPage() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
+        
   );
+
 }
