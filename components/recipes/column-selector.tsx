@@ -49,6 +49,7 @@ export default function ColumnSelector({
     }
   }, [storageKey]);
 
+
   useEffect(() => {
     const visibleKeys = Object.keys(visible).filter((k) => visible[k]);
     try {
@@ -57,20 +58,22 @@ export default function ColumnSelector({
     onChange?.(visibleKeys);
   }, [visible]);
 
+
   function toggle(key: string) {
     setVisible((s) => ({ ...s, [key]: !s[key] }));
   }
 
   useEffect(() => {
-    function onDoc(e: MouseEvent) {
+    function onDown(e: MouseEvent) {
       if (!ref.current) return;
       if (e.target instanceof Node && !ref.current.contains(e.target)) {
         setOpen(false);
       }
     }
-    document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
   }, []);
+
   return (
     <div className="relative" ref={ref}>
       <button
@@ -106,7 +109,7 @@ export default function ColumnSelector({
                       type="checkbox"
                       checked={active}
                       onChange={() => toggle(c.key)}
-                      className="h-4 w-4"
+                      className="h-4 w-4 "
                     />
                     <span className="truncate">{c.label}</span>
                   </div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Recipe } from "@/lib/types";
+import { Eye } from "lucide-react";
 
 interface RecipesTableProps {
   recipes: Recipe[];
@@ -21,27 +22,23 @@ export default function RecipesTable({
     <div className="overflow-hidden rounded-2xl border bg-white dark:bg-zinc-900 shadow-sm">
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto text-sm">
-          <thead className="sticky top-0 bg-white/80 backdrop-blur-sm dark:bg-zinc-900/80">
+          <thead className="sticky top-0 bg-linear-to-r from-orange-500/80 to-red-600/70 text-white font-extrabold shadow-sm backdrop-blur-sm border-b ">
             <tr>
-              {cols["name"] && (
-                <th className="px-4 py-3 text-left font-medium">Name</th>
-              )}
+              {cols["name"] && <th className="px-4 py-3 text-left ">Name</th>}
               {cols["category"] && (
-                <th className="px-4 py-3 text-left font-medium">Category</th>
+                <th className="px-4 py-3 text-left ">Category</th>
               )}
               {cols["calories"] && (
-                <th className="px-4 py-3 text-right font-medium">Calories</th>
+                <th className="px-4 py-3 text-right ">Calories</th>
               )}
               {cols["protein"] && (
-                <th className="px-4 py-3 text-right font-medium">Protein</th>
+                <th className="px-4 py-3 text-right ">Protein</th>
               )}
               {cols["carbs"] && (
-                <th className="px-4 py-3 text-right font-medium">Carbs</th>
+                <th className="px-4 py-3 text-right ">Carbs</th>
               )}
-              {cols["fats"] && (
-                <th className="px-4 py-3 text-right font-medium">Fats</th>
-              )}
-              <th className="px-4 py-3" />
+              {cols["fats"] && <th className="px-4 py-3 text-right ">Fats</th>}
+              <th className="px-4 py-3 text-right ">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-zinc-900">

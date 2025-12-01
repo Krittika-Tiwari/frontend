@@ -13,28 +13,27 @@ export default function Home() {
         <div className="relative min-h-screen mx-auto max-w-7xl px-6 py-28 lg:flex lg:items-center lg:py-40">
           <div className="max-w-2xl space-y-6 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm backdrop-blur">
-             
               <span className="text-zinc-300 font-bold">FoodLens</span>
             </div>
 
             <h1 className="text-5xl font-bold leading-tight sm:text-7xl">
-              Order Tasty & Fresh
+              Discover Nutritious
               <span className="block bg-linear-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-                Food Anytime
+                Recipes & Nutrition
               </span>
             </h1>
 
             <p className="text-lg text-zinc-300">
-              Browse curated recipes with full nutrition, beautiful visuals, and
-              effortless cooking steps — all in one place.
+              Browse curated recipes with detailed nutrition facts, beautiful
+              visuals, and step-by-step cooking instructions — all in one place.
             </p>
 
-            {/* Buttons */}
+
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-start">
               <Link href="/recipes">
                 <button
                   className="flex items-center gap-2 rounded-lg px-6 py-3 text-base font-semibold 
-                  bg-linear-to-r from-orange-500 to-red-600 shadow-xl shadow-red-500/20"
+                  bg-linear-to-r from-orange-500 to-red-600 shadow-xl shadow-red-500/20 hover:cursor-pointer"
                 >
                   <Search className="h-5 w-5" />
                   Browse Recipes
@@ -44,7 +43,7 @@ export default function Home() {
               <Link href="/recipes?filter=Veg">
                 <button
                   className="flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium
-                  border border-zinc-700 bg-white/5 backdrop-blur"
+                  border border-zinc-700 bg-white/5 backdrop-blur hover:cursor-pointer"
                 >
                   <ChefHat className="h-5 w-5" />
                   Vegetarian Only

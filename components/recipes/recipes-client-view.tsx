@@ -23,7 +23,7 @@ export default function RecipesClientView({ recipes }: Props) {
   const [visibleKeys, setVisibleKeys] = useState<string[]>(
     DEFAULT_COLUMNS.map((c) => c.key)
   );
-  const [view, setView] = useState<"grid" | "table">("grid");
+  const [view, setView] = useState<"grid" | "table">("table");
 
   return (
     <div className="mb-6 min-h-[500px]">
@@ -32,20 +32,20 @@ export default function RecipesClientView({ recipes }: Props) {
           <div className="text-sm text-zinc-600 dark:text-zinc-400">View</div>
           <div className="flex gap-2">
             <button
-              onClick={() => setView("grid")}
-              className={`rounded-md px-3 py-1 text-sm ${
-                view === "grid" ? "bg-zinc-900 text-white" : "bg-zinc-100"
-              }`}
-            >
-              Grid
-            </button>
-            <button
               onClick={() => setView("table")}
-              className={`rounded-md px-3 py-1 text-sm ${
+              className={`rounded-md px-3 py-1 text-sm border border-zinc-300 ${
                 view === "table" ? "bg-zinc-900 text-white" : "bg-zinc-100"
               }`}
             >
               Table
+            </button>
+            <button
+              onClick={() => setView("grid")}
+              className={`rounded-md px-3 py-1 text-sm  border border-zinc-300 ${
+                view === "grid" ? "bg-zinc-900 text-white" : "bg-zinc-100"
+              }`}
+            >
+              Grid
             </button>
           </div>
         </div>
