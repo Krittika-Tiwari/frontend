@@ -56,9 +56,93 @@ export function RecipeFilters() {
   const hasActiveFilters = search || activeCategory !== "all";
 
   return (
-    <div className="space-y-4">
-      <form onSubmit={handleSearch} className="flex gap-3 items-center">
-        <div className="relative flex-1">
+    <div className="w-full flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+      <div  className="flex flex-col gap-2">
+        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+          <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            Filter by:
+          </span>
+          {categories.map((category) => {
+            const Icon = category.icon;
+            const isActive = activeCategory === category.value;
+
+            return (
+              <button
+                key={category.value}
+                onClick={() => handleCategoryChange(category.value)}
+                className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-linear-to-r from-orange-500 to-red-600 text-white shadow-sm"
+                    : "border border-zinc-200 bg-white/60 text-zinc-800 hover:bg-orange-50 dark:bg-zinc-800 dark:border-zinc-700"
+                }`}
+              >
+                {Icon && (
+                  <Icon
+                    className={`h-4 w-4 ${
+                      isActive ? "text-white" : "text-orange-500"
+                    }`}
+                  />
+                )}
+                {category.label}
+              </button>
+            );
+          })}
+
+          {hasActiveFilters && (
+            <button
+              onClick={clearFilters}
+              className="inline-flex items-center gap-2 rounded-full bg-red-50 text-red-600 px-3 py-1.5 text-sm"
+            >
+              <X className="h-4 w-4" />
+              Clear
+            </button>
+          )}
+        </div>
+
+        {hasActiveFilters && (
+          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+            <span className="text-sm text-zinc-600 dark:text-zinc-400">
+              Active filters:
+            </span>
+
+            {search && (
+              <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-sm">
+                <span>Search: {search}</span>
+                <button
+                  onClick={() => {
+                    setSearch("");
+                    const params = new URLSearchParams(searchParams.toString());
+                    params.delete("search");
+                    router.push(`/recipes?${params.toString()}`);
+                  }}
+                  className="ml-1 hover:text-zinc-900 dark:hover:text-zinc-100"
+                >
+                  <X className="h-3 w-3" />
+                  {}
+                </button>
+              </span>
+            )}
+
+            {activeCategory !== "all" && (
+              <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-sm">
+                <span>Category: {activeCategory}</span>
+                <button
+                  onClick={() => handleCategoryChange("all")}
+                  className="ml-1 hover:text-zinc-900 dark:hover:text-zinc-100"
+                >
+                  <X className="h-3 w-3" />
+                  {}
+                </button>
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+      <form
+        onSubmit={handleSearch}
+        className="flex flex-col md:flex-row gap-3 w-full md:w-auto md:items-center"
+      >
+        <div className="relative flex-1 md:w-64">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-orange-400" />
           <input
             type="text"
@@ -69,102 +153,29 @@ export function RecipeFilters() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="inline-flex items-center gap-2 rounded-md bg-linear-to-r from-orange-500 to-red-600 text-white shadow-md px-3 py-1 text-sm hover:opacity-95"
-        >
-          Search
-        </button>
-
-        <button
-          type="button"
-          onClick={() => {
-            setSearch("");
-            const params = new URLSearchParams(searchParams.toString());
-            params.delete("search");
-            params.delete("page");
-            router.push(`/recipes?${params.toString()}`);
-          }}
-          className="text-sm text-zinc-600 dark:text-zinc-300 px-2 py-1"
-        >
-          Reset
-        </button>
-      </form>
-
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-          Filter by:
-        </span>
-        {categories.map((category) => {
-          const Icon = category.icon;
-          const isActive = activeCategory === category.value;
-
-          return (
-            <button
-              key={category.value}
-              onClick={() => handleCategoryChange(category.value)}
-              className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                isActive
-                  ? "bg-linear-to-r from-orange-500 to-red-600 text-white shadow-sm"
-                  : "border border-zinc-200 bg-white/60 text-zinc-800 hover:bg-orange-50 dark:bg-zinc-800 dark:border-zinc-700"
-              }`}
-            >
-              {Icon && (
-                <Icon
-                  className={`h-4 w-4 ${
-                    isActive ? "text-white" : "text-orange-500"
-                  }`}
-                />
-              )}
-              {category.label}
-            </button>
-          );
-        })}
-
-        {hasActiveFilters && (
+        <div className="flex gap-3">
           <button
-            onClick={clearFilters}
-            className="inline-flex items-center gap-2 rounded-full bg-red-50 text-red-600 px-3 py-1.5 text-sm"
+            type="submit"
+            className="inline-flex items-center gap-2 rounded-md bg-linear-to-r from-orange-500 to-red-600 text-white shadow-md px-3 py-1 text-sm hover:opacity-95"
           >
-            <X className="h-4 w-4" /> Clear
+            Search
           </button>
-        )}
-      </div>
 
-      {hasActiveFilters && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-zinc-600 dark:text-zinc-400">
-            Active filters:
-          </span>
-          {search && (
-            <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-sm">
-              <span>Search: {search}</span>
-              <button
-                onClick={() => {
-                  setSearch("");
-                  const params = new URLSearchParams(searchParams.toString());
-                  params.delete("search");
-                  router.push(`/recipes?${params.toString()}`);
-                }}
-                className="ml-1 hover:text-zinc-900 dark:hover:text-zinc-100"
-              >
-                <X className="h-3 w-3" />{}
-              </button>
-            </span>
-          )}
-          {activeCategory !== "all" && (
-            <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-sm">
-              <span>Category: {activeCategory}</span>
-              <button
-                onClick={() => handleCategoryChange("all")}
-                className="ml-1 hover:text-zinc-900 dark:hover:text-zinc-100"
-              >
-                <X className="h-3 w-3" />{}
-              </button>
-            </span>
-          )}
+          <button
+            type="button"
+            onClick={() => {
+              setSearch("");
+              const params = new URLSearchParams(searchParams.toString());
+              params.delete("search");
+              params.delete("page");
+              router.push(`/recipes?${params.toString()}`);
+            }}
+            className="text-sm text-zinc-600 px-2 py-1"
+          >
+            Reset
+          </button>
         </div>
-      )}
+      </form>
     </div>
   );
 }
